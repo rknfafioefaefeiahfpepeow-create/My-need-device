@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>DEVICE MATCH — 次に買うべきデバイス診断</title>
+<style>
+:root{--bg:#f5f7fb;--ink:#172033;--muted:#667085;--card:#fff;--accent:#5b67f1;--accent2:#8b5cf6;--line:#e3e8f2;--soft:#eef0ff;--green:#14866d;--shadow:0 18px 50px rgba(28,39,75,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI","Noto Sans JP",sans-serif;line-height:1.65}
+button,input{font:inherit}button{cursor:pointer}.wrap{max-width:1100px;margin:auto;padding:24px 20px 70px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 0 24px}.brand{font-weight:900;letter-spacing:.07em;display:flex;align-items:center;gap:10px}.brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 8px 18px #5b67f144}.nav-note{color:var(--muted);font-size:.82rem}
+.hero{position:relative;overflow:hidden;padding:clamp(28px,6vw,66px);border-radius:30px;color:#fff;background:radial-gradient(circle at 90% 10%,#8d7bff 0,transparent 28%),linear-gradient(125deg,#151b36,#292e65 65%,#5143a6);box-shadow:0 22px 60px #272b5b24}
+.hero:after{content:"";position:absolute;width:250px;height:250px;border:1px solid #ffffff22;border-radius:50%;right:-65px;bottom:-130px;box-shadow:0 0 0 35px #ffffff08,0 0 0 70px #ffffff06}
+.kicker{font-size:.75rem;letter-spacing:.2em;font-weight:850;color:#c7c8ff}.hero h1{font-size:clamp(2.1rem,6vw,4.2rem);line-height:1.1;letter-spacing:-.04em;margin:15px 0 18px;max-width:760px}.hero p{max-width:630px;color:#e0e3ff;margin:0;font-size:1.03rem}.hero-bottom{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.pill{border:1px solid #ffffff35;background:#ffffff10;border-radius:99px;padding:7px 12px;font-size:.82rem;color:#f0efff}
+.layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.7fr);gap:20px;margin-top:22px;align-items:start}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,3vw,28px);box-shadow:var(--shadow)}.card h2{font-size:1.28rem;letter-spacing:-.02em;margin:0 0 7px}.muted{color:var(--muted)}.small{font-size:.87rem}.progressline{display:flex;justify-content:space-between;gap:10px;font-size:.82rem;color:var(--muted);margin:2px 0 9px}.bar{height:7px;background:#edf0f6;border-radius:99px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .25s}.q-head{margin:24px 0 17px}.q-head h2{font-size:1.5rem;margin-bottom:5px}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.option{display:flex;align-items:flex-start;text-align:left;gap:11px;min-height:88px;padding:14px;border:1.5px solid var(--line);background:#fff;border-radius:16px;color:var(--ink);transition:transform .16s,border-color .16s,background .16s;position:relative}.option:hover{transform:translateY(-2px);border-color:#b7bfff}.option.selected{border-color:var(--accent);background:var(--soft);box-shadow:inset 0 0 0 1px var(--accent)}.option.selected:after{content:"✓";position:absolute;right:10px;top:8px;background:var(--accent);color:white;border-radius:50%;font-size:.72rem;width:20px;height:20px;display:grid;place-items:center;font-weight:900}.emoji{font-size:1.55rem;line-height:1.3}.option strong{display:block;font-size:.94rem;padding-right:12px}.option small{display:block;color:var(--muted);font-size:.79rem;line-height:1.4;margin-top:4px}.q-foot{font-size:.78rem;color:var(--muted);margin:12px 0 0}.actions{display:flex;justify-content:space-between;gap:10px;margin-top:24px}.btn{border:0;border-radius:13px;padding:12px 18px;font-weight:800;transition:transform .15s,opacity .15s}.btn:hover{transform:translateY(-1px)}.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 8px 18px #5b67f12c}.secondary{background:#edf0f7;color:#344054}.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}.side-card{position:sticky;top:18px}.side-icon{font-size:2.1rem}.side-card h3{margin:8px 0}.mini-list{padding:0;margin:16px 0 0;list-style:none}.mini-list li{display:flex;gap:9px;margin:12px 0;color:var(--muted);font-size:.88rem}.check{color:var(--green);font-weight:900}
+.hidden{display:none!important}.result-top{text-align:center;padding:12px 0 20px}.result-icon{font-size:3.5rem}.eyebrow{font-size:.75rem;font-weight:900;letter-spacing:.13em;color:var(--accent)}.result-top h2{font-size:clamp(1.8rem,4vw,2.7rem);margin:8px 0}.match{display:inline-flex;background:#e8faf4;color:#08795f;border-radius:99px;padding:5px 12px;font-size:.82rem;font-weight:850}.result-desc{max-width:740px;margin:12px auto;color:var(--muted)}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.rank-list{display:grid;gap:12px;margin-top:16px}.rank{border:1px solid var(--line);border-radius:15px;padding:13px}.rank-top{display:flex;justify-content:space-between;gap:10px;font-weight:750;font-size:.9rem}.rank-top span:last-child{color:var(--accent);white-space:nowrap}.track{height:7px;background:#eef0f6;border-radius:99px;overflow:hidden;margin-top:9px}.track span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2))}.why{background:#f8f9ff;border-radius:15px;padding:16px;margin-top:14px;font-size:.9rem}.product-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:15px}.product{border:1px solid var(--line);border-radius:16px;padding:15px;display:flex;flex-direction:column;gap:7px}.product .picon{font-size:1.8rem}.product h3{font-size:.98rem;margin:0}.price{font-weight:850;color:var(--accent)}.product p{font-size:.82rem;color:var(--muted);margin:0;flex:1}.text-link{color:var(--accent);font-weight:800;text-decoration:none;font-size:.85rem}.text-link:hover{text-decoration:underline}.section{margin-top:22px}.section-title{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:13px}.section-title h2{margin:0}.compare-wrap{overflow-x:auto;margin-top:14px}table{border-collapse:collapse;width:100%;min-width:540px;font-size:.87rem}th,td{text-align:left;border-bottom:1px solid var(--line);padding:12px 10px}th{color:var(--muted);font-weight:750;background:#f8f9fc}td:first-child{font-weight:750}.steps{counter-reset:step;display:grid;gap:12px;margin-top:16px}.step{display:grid;grid-template-columns:38px 1fr;gap:12px;align-items:start}.step:before{counter-increment:step;content:counter(step);width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:var(--soft);color:var(--accent);font-weight:900}.step strong{display:block}.step p{margin:3px 0;color:var(--muted);font-size:.88rem}.code{display:block;overflow-wrap:anywhere;background:#111827;color:#e5e7eb;padding:12px;border-radius:10px;font-family:ui-monospace,monospace;font-size:.83rem;margin-top:8px}.disclaimer{font-size:.79rem;color:var(--muted);margin-top:15px}.footer{text-align:center;font-size:.8rem;color:var(--muted);padding:28px 0 0}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.side-card{position:static}.result-grid{grid-template-columns:1fr}}
+@media(max-width:540px){.wrap{padding:12px 12px 45px}.options,.product-list{grid-template-columns:1fr}.hero{border-radius:22px}.nav-note{display:none}.option{min-height:72px}.actions .btn{padding:11px 13px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav><div class="brand"><span class="brand-mark">D</span> DEVICE MATCH</div><div class="nav-note">Find your next device. Make it count.</div></nav>
+<header class="hero">
+<div class="kicker">YOUR PERSONAL TECH GUIDE</div>
+<h1>次に買うべきもの、<br>ちゃんと診断しよう。</h1>
+<p>「新しいPC？ iPad？ それともゲーム機？」7つの質問から、あなたの目的・予算・持ち物に合うデバイスを見つけよう。</p>
+<div class="hero-bottom"><span class="pill">✦ 27カテゴリを診断</span><span class="pill">↗ 複数選択OK</span><span class="pill">◎ 比較・購入リンク付き</span></div>
+</header>
+<div class="layout">
+<section class="card" id="quiz">
+<div class="progressline"><span id="stepLabel">質問 1 / 7</span><span id="progressPct">14%</span></div><div class="bar"><span id="progressBar"></span></div>
+<div class="q-head"><h2 id="question"></h2><p class="muted small" id="hint"></p></div>
+<div class="options" id="options"></div><p class="q-foot" id="multiHint">複数選べる質問です。あてはまるものをすべて選んでね。</p>
+<div class="actions"><button class="btn secondary" id="back">← 戻る</button><button class="btn primary" id="next" disabled>次へ →</button></div>
+</section>
+<aside class="card side-card"><div class="side-icon">🧭</div><h3>診断のポイント</h3><p class="muted small">高いもの＝正解、ではありません。今の生活でいちばん役に立つものを探します。</p><ul class="mini-list"><li><span class="check">✓</span><span>予算と用途をまとめて考える</span></li><li><span class="check">✓</span><span>すでに持っている機器も考慮</span></li><li><span class="check">✓</span><span>おすすめ候補を比較できる</span></li><li><span class="check">✓</span><span>回答はこのブラウザ内で処理</span></li></ul></aside>
+</div>
+<section class="hidden" id="results">
+<div class="card section">
+<div class="result-top"><div class="result-icon" id="resultIcon">💻</div><span class="match" id="matchLabel">あなたにおすすめ</span><h2 id="resultName"></h2><p class="result-desc" id="resultDesc"></p></div>
+<div class="result-grid">
+<div class="card" style="box-shadow:none"><h2>🏆 おすすめランキング</h2><p class="muted small">回答との相性が高い順</p><div class="rank-list" id="rankList"></div></div>
+<div class="card" style="box-shadow:none"><h2>💡 おすすめの理由</h2><div class="why" id="reason"></div><div class="why"><strong>購入前チェック</strong><br><span class="muted">必要なアプリ・対応機種・容量・保証・周辺機器の追加費用も確認しよう。</span></div></div>
+</div>
+</div>
+<div class="card section"><div class="section-title"><div><div class="eyebrow">PRODUCT IDEAS</div><h2>具体的な商品候補</h2></div><span class="muted small">検索リンク付き</span></div><p class="muted small">診断結果カテゴリから代表的な候補を表示します。価格は変動するため、販売店で最新価格を確認してください。</p><div class="product-list" id="products"></div><p class="disclaimer">商品名は比較を始めるための候補例です。購入を保証・推奨するものではありません。モデルの世代・構成・販売価格は購入先で必ず確認してください。</p></div>
+<div class="card section"><div class="section-title"><div><div class="eyebrow">COMPARE</div><h2>候補を比較</h2></div></div><p class="muted small">上位候補を、得意なこと・気をつけたいこと・予算感で見比べられます。</p><div class="compare-wrap"><table><thead><tr><th>候補</th><th>得意なこと</th><th>気をつけたいこと</th><th>予算感</th></tr></thead><tbody id="compareBody"></tbody></table></div></div>
+<div class="actions"><button class="btn secondary" id="review">回答を見直す</button><button class="btn primary" id="restart">↻ もう一度診断</button></div>
+</section>
+<div class="footer">DEVICE MATCH · 診断は目安です。最終的な購入判断は最新の仕様・価格を確認して行ってください。</div>
+</div>
+<script>
+const devices=[
+{id:'desktop',name:'WindowsデスクトップPC',icon:'🖥️',good:'高い拡張性・据え置き作業',watch:'モニターなど周辺機器が必要',budget:'中〜高価格'},
+{id:'gamingpc',name:'WindowsゲームPC',icon:'🎮',good:'PCゲーム・高い描画性能',watch:'ゲーム別の推奨スペックと発熱',budget:'中〜高価格'},
+{id:'laptop',name:'WindowsノートPC',icon:'💻',good:'仕事・勉強・持ち運び',watch:'性能と重量・バッテリーの両立',budget:'幅広い価格帯'},
+{id:'macstudio',name:'Mac Studio',icon:'🧊',good:'重い制作作業を据え置きで',watch:'モニター等を含む総額・アプリ対応',budget:'高価格'},
+{id:'macbook',name:'MacBook',icon:'🍎',good:'持ち運び・バッテリー・macOS',watch:'必要アプリのMac対応とメモリ容量',budget:'中〜高価格'},
+{id:'watch',name:'スマートウォッチ',icon:'⌚',good:'通知・運動記録・手元の操作',watch:'スマホOSとの互換性・電池持ち',budget:'低〜高価格'},
+{id:'tablet',name:'タブレット',icon:'📱',good:'動画・読書・ウェブ閲覧',watch:'PCの代わりになるかは用途次第',budget:'低〜中価格'},
+{id:'ipad',name:'iPad',icon:'✍️',good:'手書き・学習・イラスト',watch:'ペン・キーボードの追加費用',budget:'中価格〜'},
+{id:'phone',name:'スマートフォン',icon:'📲',good:'毎日使う連絡・撮影・アプリ',watch:'今の端末の電池・容量・サポート',budget:'幅広い価格帯'},
+{id:'earbuds',name:'ワイヤレスイヤホン',icon:'🎧',good:'音楽・通話・移動時間',watch:'装着感・マイク・ノイズキャンセル',budget:'低〜高価格'},
+{id:'console',name:'ゲーム機',icon:'🕹️',good:'手軽にゲームを楽しむ',watch:'遊びたいタイトルと友だちの機種',budget:'中価格'},
+ {id:'games',name:'ゲームソフト',icon:'🎲',good:'手持ちのゲーム機ですぐ遊べる',watch:'対応機種・プレイスタイル',budget:'低〜中価格'},
+{id:'switchgames',name:'Nintendo Switchゲームソフト',icon:'🕹️',good:'Switch本体で遊べるゲームを追加',watch:'Switch / Switch 2の対応表記を確認',budget:'低〜中価格'},
+{id:'pcgames',name:'PCゲームソフト',icon:'🎮',good:'PCで遊べるダウンロード・パッケージゲーム',watch:'Steamなどのストアと必要スペックを確認',budget:'低〜中価格'},
+{id:'monitor',name:'モニター・ディスプレイ',icon:'🖥️',good:'作業領域や映像体験をアップグレード',watch:'解像度・リフレッシュレート・接続端子',budget:'低〜高価格'},
+{id:'keyboard',name:'キーボード',icon:'⌨️',good:'文章作成やゲームの操作性を改善',watch:'配列・打鍵感・接続方式',budget:'低〜高価格'},
+{id:'mouse',name:'マウス・トラックボール',icon:'🖱️',good:'細かな操作や長時間作業を快適に',watch:'手の大きさ・形状・対応OS',budget:'低〜高価格'},
+{id:'printer',name:'プリンター',icon:'🖨️',good:'書類・写真・学校の課題を印刷',watch:'インク代・印刷頻度・設置スペース',budget:'低〜中価格'},
+{id:'storage',name:'外付けSSD・ストレージ',icon:'💾',good:'容量不足の解消やデータのバックアップ',watch:'容量・転送速度・バックアップ先',budget:'低〜高価格'},
+{id:'camera',name:'デジタルカメラ',icon:'📷',good:'写真・動画を本格的に撮影',watch:'レンズ・重量・スマホとの使い分け',budget:'高価格寄り・中〜高価格'},
+{id:'microphone',name:'マイク・配信機材',icon:'🎙️',good:'通話・実況・録音の音質を改善',watch:'接続方式・設置場所・周囲の騒音',budget:'低〜高価格'},
+{id:'router',name:'Wi-Fiルーター',icon:'📡',good:'家のネット接続を安定・高速化',watch:'回線契約・家の広さ・対応規格',budget:'低〜中価格'},
+{id:'ereader',name:'電子書籍リーダー',icon:'📚',good:'読書に集中しやすく持ち運びも簡単',watch:'利用する電子書籍ストア・防水機能',budget:'中価格'},
+{id:'vr',name:'VRヘッドセット',icon:'🥽',good:'VRゲームや没入型コンテンツを体験',watch:'対応機器・装着感・プレイ空間',budget:'高価格寄り・中〜高価格'},
+{id:'powerbank',name:'モバイルバッテリー',icon:'🔋',good:'外出中のスマホや小型機器の充電',watch:'容量・重さ・必要な出力・安全性',budget:'低〜中価格'},
+{id:'smarthome',name:'スマートホーム機器',icon:'💡',good:'照明や家電を手軽に自動化',watch:'Wi-Fi環境・対応規格・既存家電との相性',budget:'低〜中価格'}
+];
+const questions=[
+{title:'いちばん叶えたいことは？',hint:'複数選択OK。やりたいことを全部選んでね。',multi:true,opts:[['work','仕事・勉強・文章作成','資料、レポート、プログラミング'],['create','動画・音楽・イラスト制作','作品づくりやクリエイティブ作業'],['play','ゲームを楽しむ','ゲームを遊ぶことが最優先'],['mobile','外出先でも便利に使う','連絡、地図、撮影、持ち歩き'],['media','動画・読書・ネットを見る','気軽なエンタメや閲覧'],['health','運動・通知・健康管理','日々の活動を記録したい'],['audio','音楽・通話を快適に','移動中やオンライン通話'],['upgrade','今の機器の不満を解消','遅い、電池が弱い、壊れたなど']]},
+{title:'主にどこで使う？',hint:'複数選択OK。使う場所を選んでね。',multi:true,opts:[['home','家が中心','机やテレビの前'],['carry','学校・職場・外出先','持ち歩くことが多い'],['both','家でも外でも','場所を選ばず使いたい'],['sofa','ソファやベッド','リラックスしながら']]},
+{title:'今、持っているものは？',hint:'複数選択OK。持っているものをすべて選んでね。',multi:true,opts:[['pc','PC','Windows PCやMac'],['phone','スマートフォン','iPhoneやAndroid'],['tablet','タブレット / iPad','大きなタッチ画面の端末'],['watch','スマートウォッチ','通知や運動記録に使う'],['audio','イヤホン','有線・ワイヤレス問わず'],['game','ゲーム機 / ゲーム用PC','ゲームを遊べる機器'],['none','まだほとんど持っていない','これから環境を整えたい']]},
+{title:'予算はどのくらい？',hint:'ここだけは1つ選んでね。',multi:false,opts:[['low','〜1万円','小さな買い物から'],['mid','1万〜5万円','アクセサリーや一部の端末'],['high','5万〜15万円','スマホ・タブレット・PCの一部'],['premium','15万円以上','高性能PCなども候補'],['flex','まだ決めていない','価値があれば検討']]},
+{title:'どんな使い方が理想？',hint:'複数選択OK。重視するポイントを選ぼう。',multi:true,opts:[['power','性能・処理の速さ','重い作業や高画質ゲーム'],['portable','軽さ・持ち運び','外でも気軽に使いたい'],['simple','簡単ですぐ使える','設定に時間をかけたくない'],['creative','描く・作る・書き込む','ペンや制作アプリ'],['comfort','快適さ・便利さ','音、通知、操作性など']]},
+{title:'買い物で一番重視するのは？',hint:'複数選択OK。手頃なガジェットやゲームソフトを探している人も、ここで教えてね。',multi:true,opts:[['value','コスパ','価格に対して長く役立つ'],['affordable','できるだけ手頃な価格','1万円前後のガジェットやゲームソフトも候補'],['quality','品質・長く使える','性能やサポートも重視'],['fun','楽しさ','趣味の時間を充実させたい'],['need','困りごとの解決','今の不便をなくしたい']]},
+{title:'Apple製品との相性は？',hint:'1つ選択。今の機器との連携を考慮します。',multi:false,opts:[['apple','iPhoneやMacを使っている','Apple製品同士の連携が便利'],['windows','WindowsやAndroidが中心','Windows / Androidを使い慣れている'],['either','特にこだわりはない','目的に合えばどちらでも']]},
+{title:'自分には合わない・いらないものは？',hint:'複数選択OK。選んだものはおすすめ候補から外すよ。特にない場合は「特になし」を選んでね。',multi:true,opts:[['avoidexpensive','高価な機器','高性能PC・高価格帯のカメラなど'],['avoidapple','Apple製品','Mac・iPad・Apple Watchなど'],['avoidpc','PC・パソコン周辺機器','デスクトップPC・ノートPCなど'],['avoidgaming','ゲーム機・ゲームソフト','Switch・PCゲームなど'],['avoidmobile','スマホ・タブレット系','スマートフォン・タブレットなど'],['avoidaudio','音声機器','イヤホン・マイクなど'],['avoiddesk','デスク周りの機器','モニター・キーボード・マウスなど'],['avoidcamera','カメラ・VR機器','カメラ・VRヘッドセットなど'],['avoidhomenet','ネットワーク・スマートホーム','ルーター・スマートホーム機器など'],['avoidother','その他の周辺機器','プリンター・ストレージ・電子書籍リーダー・モバイルバッテリーなど'],['avoidwatch','スマートウォッチ','Apple Watch・Google Pixel Watch・Garminなど'],['avoidnone','特になし','どのジャンルも候補にしてOK']]},
+{title:'手頃なガジェット・ゲームソフトで気になるものは？',hint:'これまでの回答から高価な機器が優先ではない場合にだけ表示される質問だよ。複数選択OK！',multi:true,opts:[['desksetup','デスク環境を整えたい','モニター・キーボード・マウス'],['backup','保存容量やバックアップが心配','外付けSSD・ストレージ'],['print','紙に印刷したい','プリンター'],['stream','配信・録音・通話の音質を上げたい','マイク・配信機材'],['network','家のWi-Fiを改善したい','Wi-Fiルーター'],['reading','読書専用の端末がほしい','電子書籍リーダー'],['battery','外出時の充電が不安','モバイルバッテリー'],['smartliving','家電を便利に自動化したい','スマートホーム機器'],['switchgameinterest','Switchのゲームソフトがほしい','Nintendo Switch / Switch 2向け'],['pcgameinterest','PCゲームソフトがほしい','SteamなどのPCゲームストア']]}
+];
+const products={
+desktop:[['🖥️','自作PC / BTOデスクトップ','用途に合わせて構成を選びやすい','Windows デスクトップ BTO PC 価格'],['🖥️','Dell / HP デスクトップ','メーカー保証やサポートも比較','Dell HP デスクトップ PC 日本']],
+gamingpc:[['🎮','GALLERIA / FRONTIER など','遊びたいゲームの推奨スペックから選ぶ','GALLERIA ゲーミングPC 価格'],['🎮','ゲーミングPC構成比較','GPU・メモリ・SSDをチェック','ゲーミングPC RTX 価格 比較']],
+laptop:[['💻','Surface Laptop シリーズ','軽さとWindows体験を比較','Microsoft Surface Laptop 日本 価格'],['💻','ThinkPad / HP / ASUS ノート','キーボード、重さ、端子を比較','Windows ノートPC 価格 比較']],
+macstudio:[['🧊','Apple Mac Studio','重い制作作業向けの据え置きMac','Apple Mac Studio 価格 日本'],['🖥️','制作向けモニター','本体以外の予算も見積もる','クリエイター向けモニター 価格']],
+macbook:[['🍎','Apple MacBook Air','持ち運びと日常作業を中心に比較','Apple MacBook Air 価格 日本'],['🍎','Apple MacBook Pro','高負荷作業なら構成差を確認','Apple MacBook Pro 価格 日本']],
+watch:[['⌚','Apple Watch','iPhone利用者は対応機能を比較','Apple Watch 価格 日本'],['⌚','Google Pixel Watch / Garmin','Android連携や運動機能を比較','Pixel Watch Garmin スマートウォッチ 価格']],
+tablet:[['📱','Androidタブレット','画面サイズ、OS更新、容量を比較','Android タブレット 価格 比較'],['📱','Samsung Galaxy Tab','動画・読書・マルチタスクを比較','Samsung Galaxy Tab 日本 価格']],
+ipad:[['✍️','Apple iPad','ノート・学習・動画視聴の定番候補','Apple iPad 価格 日本'],['✍️','Apple Pencil 対応アクセサリ','対応するiPad世代を必ず確認','Apple Pencil 対応 iPad 価格']],
+phone:[['📲','Apple iPhone','カメラ・容量・サポートを比較','Apple iPhone 価格 日本'],['📲','Google Pixel / Samsung Galaxy','Androidのカメラ・電池・価格を比較','Google Pixel Samsung Galaxy 価格 日本']],
+earbuds:[['🎧','Sony WF シリーズ','ノイズキャンセリングや装着感を確認','Sony WF ワイヤレスイヤホン 価格'],['🎧','Apple AirPods / Anker Soundcore','端末との連携と予算で比較','AirPods Anker Soundcore 価格 日本']],
+console:[['🕹️','Nintendo Switch シリーズ','遊びたい専用タイトルを先に確認','Nintendo Switch 本体 価格 日本'],['🕹️','PlayStation 5','遊びたいタイトル・オンライン環境を確認','PlayStation 5 価格 日本']],
+games:[['🎲','Nintendo / PlayStation のソフト','持っている機種に対応する版を選ぶ','ゲームソフト 人気 作 価格'],['🎲','SteamのPCゲーム','PCの必要・推奨スペックを確認','Steam PCゲーム セール']],
+switchgames:[['🕹️','Nintendo Switch ゲームソフト','Switch / Switch 2の対応表記を確認','Nintendo Switch ゲームソフト 人気 価格'],['🕹️','中古・ダウンロード版ソフト','販売形態やアカウント条件を確認','Switch ゲームソフト 中古 ダウンロード']],
+pcgames:[['🎮','Steam PCゲーム','必要・推奨スペックと対応OSを確認','Steam PCゲーム セール 人気'],['🎮','PCゲームのセール情報','遊びたいゲームの公式ストアを確認','PCゲーム セール 公式 ストア']],
+monitor:[['🖥️','高解像度モニター','解像度・パネル・リフレッシュレートを比較','PC モニター 価格 比較'],['🖥️','USB-C対応モニター','ノートPCとの給電・接続を確認','USB-C モニター 価格']],
+keyboard:[['⌨️','メカニカルキーボード','配列・スイッチ・静音性を試す','メカニカルキーボード 価格 比較'],['⌨️','薄型ワイヤレスキーボード','机の広さや複数端末対応を確認','ワイヤレスキーボード 価格']],
+mouse:[['🖱️','ワイヤレスマウス','形状・重さ・電池持ちを比較','ワイヤレスマウス 価格 比較'],['🖱️','トラックボール','手首の動かしやすさを確認','トラックボール 価格 比較']],
+printer:[['🖨️','インクジェット複合機','コピー・スキャンの必要性も確認','家庭用プリンター 複合機 価格'],['🖨️','モノクロレーザープリンター','文書を多く印刷する人向けに比較','モノクロレーザープリンター 価格']],
+storage:[['💾','ポータブルSSD','容量・速度・耐衝撃性を比較','ポータブル SSD 1TB 価格'],['💾','外付けHDD','大容量バックアップ向けに比較','外付け HDD 4TB 価格']],
+camera:[['📷','ミラーレスカメラ','本体だけでなくレンズ予算も確認','ミラーレスカメラ 初心者 価格'],['📷','コンパクトデジタルカメラ','サイズとズーム性能を比較','コンパクトデジタルカメラ 価格']],
+microphone:[['🎙️','USBマイク','PCへの接続の簡単さと音質を比較','USB マイク 配信 価格'],['🎙️','ワイヤレスマイク','スマホ・カメラとの対応を確認','ワイヤレスマイク 価格 比較']],
+router:[['📡','Wi-Fi 6 / Wi-Fi 7ルーター','回線速度と家の広さに合わせて選ぶ','Wi-Fi ルーター Wi-Fi 7 価格'],['📡','メッシュWi-Fi','家の隅まで電波を届けたい場合に比較','メッシュ Wi-Fi 価格']],
+ereader:[['📚','Kindleシリーズ','使う電子書籍ストアと画面サイズを確認','Kindle 電子書籍リーダー 価格'],['📚','Koboシリーズ','利用ストアや防水機能を比較','楽天 Kobo 電子書籍リーダー 価格']],
+vr:[['🥽','Meta Questシリーズ','遊びたいアプリと装着感を確認','Meta Quest 価格 日本'],['🥽','VR対応PC環境','PC接続型は必要スペックも確認','VR 対応 ゲーミングPC 価格']],
+powerbank:[['🔋','USB-C PD対応モバイルバッテリー','容量・出力・本体重量を比較','モバイルバッテリー USB-C PD 価格'],['🔋','小型モバイルバッテリー','普段持ち歩く重さを優先して比較','小型 モバイルバッテリー 価格']],
+smarthome:[['💡','スマート電球・スマートプラグ','今ある照明・家電に対応するか確認','スマート電球 スマートプラグ 価格'],['💡','スマートスピーカー','対応サービスや音声操作を比較','スマートスピーカー 価格 日本']]
+};
+let answers=Array(questions.length).fill(null).map(()=>[]),current=0,lastRanked=[];
+const $=id=>document.getElementById(id);
+const emojis={work:'🧑‍💻',create:'🎨',play:'🎮',mobile:'📱',media:'📺',health:'❤️',audio:'🎧',upgrade:'🔧',home:'🏠',carry:'🎒',both:'🌐',sofa:'🛋️',pc:'💻',phone:'📲',tablet:'📱',watch:'⌚',game:'🕹️',none:'✨',low:'💴',mid:'💳',high:'💰',premium:'🏆',flex:'🤔',power:'⚡',portable:'🪶',simple:'👌',creative:'🖊️',comfort:'🛋️',value:'🪙',quality:'🛡️',fun:'🎉',need:'🎯',affordable:'🪙',apple:'🍎',windows:'🪟',either:'🤝',desksetup:'🖥️',backup:'💾',print:'🖨️',photo:'📷',stream:'🎙️',network:'📡',reading:'📚',vrinterest:'🥽',battery:'🔋',smartliving:'💡',switchgameinterest:'🕹️',pcgameinterest:'🎮',avoidexpensive:'💸',avoidapple:'🍎',avoidpc:'💻',avoidgaming:'🎮',avoidmobile:'📱',avoidaudio:'🎧',avoiddesk:'🖥️',avoidcamera:'📷',avoidhomenet:'📡',avoidother:'🧰',avoidwatch:'⌚',avoidnone:'👌'};
+function render(){const q=questions[current];$('stepLabel').textContent=`質問 ${current+1} / ${questions.length}`;$('progressPct').textContent=`${Math.round((current+1)/questions.length*100)}%`;$('progressBar').style.width=`${(current+1)/questions.length*100}%`;$('question').textContent=q.title;$('hint').textContent=q.hint;$('multiHint').textContent=q.multi?'✓ 選択肢を複数タップできます。もう一度タップすると解除。':'● 1つだけ選んでください。';$('options').innerHTML='';
+if(current===7){const allBtn=document.createElement('button');allBtn.type='button';allBtn.className='option';allBtn.style.justifyContent='center';allBtn.innerHTML='<span><strong>☑️ 全選択</strong><small>「特になし」以外のジャンルをすべて除外</small></span>';allBtn.onclick=()=>{const allIds=q.opts.map(o=>o[0]).filter(id=>id!=='avoidnone');answers[current]=answers[current].length===allIds.length?[]:allIds;render()};$('options').appendChild(allBtn);}
+q.opts.forEach(([id,label,sub])=>{const b=document.createElement('button');b.className='option'+(answers[current].includes(id)?' selected':'');b.setAttribute('aria-pressed',answers[current].includes(id));b.innerHTML=`<span class="emoji">${emojis[id]||'•'}</span><span><strong>${label}</strong><small>${sub}</small></span>`;b.onclick=()=>{if(q.multi){if(current===7){if(id==='avoidnone'){answers[current]=answers[current].includes(id)?[]:['avoidnone'];}else{answers[current]=answers[current].includes(id)?answers[current].filter(x=>x!==id):[...answers[current].filter(x=>x!=='avoidnone'),id];}}else{answers[current]=answers[current].includes(id)?answers[current].filter(x=>x!==id):[...answers[current].filter(x=>x!=='none'),...(id==='none'?[]:[id])];if(id==='none'&&answers[current].length===0)answers[current]=['none'];}}else answers[current]=[id];render()};$('options').appendChild(b)});
+$('back').disabled=current===0;$('next').textContent=current===questions.length-1?'診断結果を見る ✨':'次へ →';$('next').disabled=answers[current].length===0;}
+function calc(){let s=Object.fromEntries(devices.map(d=>[d.id,0]));const add=(id,n)=>{if(s[id]!==undefined)s[id]+=n};const goals=answers[0],places=answers[1],owned=answers[2],budget=answers[3][0],styles=answers[4],priorities=answers[5],eco=answers[6][0];
+const goalMap={work:{desktop:3,laptop:5,macbook:4,macstudio:2,tablet:1,ipad:2},create:{desktop:3,gamingpc:2,laptop:2,macstudio:5,macbook:4,ipad:4,tablet:2},play:{gamingpc:5,console:5,games:3,switchgames:3,pcgames:3,desktop:2,laptop:1},mobile:{phone:5,laptop:2,macbook:2,watch:2,earbuds:1,tablet:1,ipad:1},media:{tablet:4,ipad:4,phone:2,laptop:1,earbuds:2,games:1},health:{watch:5,phone:2,earbuds:1},audio:{earbuds:5,phone:1},upgrade:{phone:2,laptop:2,desktop:2,gamingpc:2,macbook:2,macstudio:1,watch:1,tablet:1,ipad:1,earbuds:1,console:1,games:2}};
+goals.forEach(g=>Object.entries(goalMap[g]||{}).forEach(([k,v])=>add(k,v*2)));
+if(places.includes('home'))['desktop','gamingpc','macstudio','console'].forEach(x=>add(x,2));if(places.includes('carry'))['laptop','macbook','phone','watch','earbuds','tablet','ipad'].forEach(x=>add(x,2));if(places.includes('both'))['laptop','macbook','phone','tablet','ipad','earbuds'].forEach(x=>add(x,2));if(places.includes('sofa'))['tablet','ipad','phone','console','earbuds'].forEach(x=>add(x,2));
+if(owned.includes('none'))['laptop','phone','desktop'].forEach(x=>add(x,2));
+if(owned.includes('pc'))['phone','watch','tablet','ipad','earbuds','games'].forEach(x=>add(x,2));
+if(owned.includes('phone'))['laptop','desktop','gamingpc','macbook','tablet','ipad','watch','earbuds','console'].forEach(x=>add(x,2));
+if(owned.includes('tablet'))['laptop','desktop','gamingpc','macbook','watch','earbuds','console'].forEach(x=>add(x,1));
+if(owned.includes('watch'))['phone','laptop','macbook','earbuds','tablet'].forEach(x=>add(x,1));
+if(owned.includes('audio'))['phone','laptop','macbook','tablet','watch'].forEach(x=>add(x,1));
+if(owned.includes('game'))['games','switchgames','pcgames','earbuds','gamingpc','console'].forEach(x=>add(x,2));
+if(owned.includes('none'))['desktop','gamingpc','macstudio','macbook','ipad','watch','console'].forEach(x=>add(x,-1));
+if(budget==='low'){['games','switchgames','pcgames','earbuds'].forEach(x=>add(x,4));['macstudio','gamingpc','desktop','macbook','camera','vr'].forEach(x=>add(x,-5))}
+if(budget==='mid'){['watch','tablet','ipad','earbuds','console','games','switchgames','pcgames'].forEach(x=>add(x,2));['macstudio','camera','vr'].forEach(x=>add(x,-3))}
+if(budget==='high') ['phone','laptop','macbook','ipad','tablet','console','watch'].forEach(x=>add(x,2));
+if(budget==='premium') ['desktop','gamingpc','macstudio','macbook','laptop'].forEach(x=>add(x,3));
+styles.forEach(st=>{const map={power:{desktop:4,gamingpc:4,macstudio:4},portable:{laptop:3,macbook:3,phone:3,watch:3,earbuds:3},simple:{phone:2,console:2,tablet:2,earbuds:2,watch:2},creative:{ipad:4,macbook:4,macstudio:4,tablet:3},comfort:{watch:2,earbuds:2,tablet:2,ipad:2}};Object.entries(map[st]||{}).forEach(([k,v])=>add(k,v))});
+priorities.forEach(p=>{const map={value:{games:2,earbuds:2,tablet:2,laptop:2},affordable:{games:5,switchgames:5,pcgames:5,earbuds:4,keyboard:3,mouse:3,storage:3,powerbank:4,smarthome:3,microphone:2,router:2},quality:{laptop:2,macbook:2,desktop:2,phone:2,watch:2},fun:{console:3,games:3,gamingpc:3,earbuds:1},need:{phone:2,laptop:2,desktop:2,gamingpc:2,watch:1,earbuds:1}};Object.entries(map[p]||{}).forEach(([k,v])=>add(k,v))});
+if(eco==='apple'){['macbook','macstudio','ipad','watch'].forEach(x=>add(x,2));add('gamingpc',-1)}if(eco==='windows')['desktop','gamingpc','laptop'].forEach(x=>add(x,2));
+const exclusions=answers[7]||[];
+const excludedDevices=new Set();
+const exclusionMap={avoidexpensive:['desktop','gamingpc','macstudio','macbook','camera','vr'],avoidapple:['macbook','macstudio','ipad','watch'],avoidpc:['desktop','gamingpc','laptop','macstudio','macbook','monitor','keyboard','mouse'],avoidgaming:['console','games','switchgames','pcgames','gamingpc'],avoidmobile:['phone','tablet','ipad','watch'],avoidaudio:['earbuds','microphone'],avoiddesk:['monitor','keyboard','mouse'],avoidcamera:['camera','vr'],avoidhomenet:['router','smarthome'],avoidother:['printer','storage','ereader','powerbank'],avoidwatch:['watch']};
+exclusions.filter(x=>x!=='avoidnone').forEach(x=>(exclusionMap[x]||[]).forEach(id=>excludedDevices.add(id)));
+const extras=answers[8]||[];
+const extraMap={desksetup:{monitor:6,keyboard:4,mouse:4},backup:{storage:7},print:{printer:7},stream:{microphone:7,earbuds:2},network:{router:7},reading:{ereader:7,tablet:1},battery:{powerbank:7,phone:1},smartliving:{smarthome:7,phone:1},switchgameinterest:{switchgames:8,games:2},pcgameinterest:{pcgames:8,games:2}};
+extras.forEach(key=>Object.entries(extraMap[key]||{}).forEach(([id,v])=>add(id,v)));
+const already={pc:['desktop','gamingpc','laptop','macstudio','macbook'],phone:['phone'],tablet:['tablet','ipad'],watch:['watch'],audio:['earbuds'],game:['console','games']};owned.forEach(o=>(already[o]||[]).forEach(id=>add(id,-3)));
+const ranked=Object.entries(s).map(([id,n])=>({device:devices.find(d=>d.id===id),score:n})).sort((a,b)=>b.score-a.score);
+const filtered=ranked.filter(x=>!excludedDevices.has(x.device.id));
+return filtered.length?filtered:ranked}
+function searchUrl(q){return 'https://www.google.com/search?q='+encodeURIComponent(q)}
+function showResult(){lastRanked=calc();const top=lastRanked[0];$('quiz').classList.add('hidden');$('results').classList.remove('hidden');$('resultIcon').textContent=top.device.icon;$('resultName').textContent=top.device.name;$('resultDesc').textContent=top.device.good+'。 '+top.device.watch+'は購入前に確認しましょう。';
+const max=Math.max(1,lastRanked[0].score);$('rankList').innerHTML=lastRanked.slice(0,5).map((x,i)=>`<div class="rank"><div class="rank-top"><span>${i+1}. ${x.device.icon} ${x.device.name}</span><span>${Math.max(0,x.score)} pt</span></div><div class="track"><span style="width:${Math.max(4,Math.max(0,x.score)/max*100)}%"></span></div></div>`).join('');
+$('reason').textContent=`選んだ目的「${goalsText(answers[0])}」、予算「${questions[3].opts.find(o=>o[0]===answers[3][0])?.[1]||'未選択'}」、重視するポイント「${goalsText(answers[4])}」などを総合して選びました。すでに持っている機器は重複購入にならないよう評価を調整しています。`;
+$('products').innerHTML=(products[top.device.id]||products.laptop).map(p=>`<article class="product"><div class="picon">${p[0]}</div><h3>${p[1]}</h3><p>${p[2]}</p><a class="text-link" target="_blank" rel="noopener noreferrer" href="${searchUrl(p[3])}">価格・仕様を検索 ↗</a></article>`).join('');
+$('compareBody').innerHTML=lastRanked.slice(0,4).map(x=>`<tr><td>${x.device.icon} ${x.device.name}</td><td>${x.device.good}</td><td>${x.device.watch}</td><td>${x.device.budget}</td></tr>`).join('');
+$('matchLabel').textContent=`おすすめ1位 · ${Math.max(0,top.score)}ポイント`;window.scrollTo({top:$('results').offsetTop-10,behavior:'smooth'})}
+function goalsText(ids){return ids.map(id=>questions.flatMap(q=>q.opts).find(o=>o[0]===id)?.[1]||id).join('・')}
+function shouldAskAffordableFollowup(){
+const budget=answers[3][0];
+const ranked=calc();
+const premiumIds=new Set(['desktop','gamingpc','laptop','macstudio','macbook','camera','vr']);
+const topThree=ranked.slice(0,3).map(x=>x.device.id);
+const premiumTop=topThree.some(id=>premiumIds.has(id));
+const explicitPremiumGoal=answers[0].includes('create')&&['high','premium','flex'].includes(budget) || answers[4].includes('power')&&['high','premium','flex'].includes(budget);
+return !premiumTop && !explicitPremiumGoal;
+}
+$('next').onclick=()=>{
+if(current===6){current=7;render();}
+else if(current===7){
+  if(shouldAskAffordableFollowup()){current=8;render();}
+  else showResult();
+}else if(current<questions.length-1){current++;render();}
+else showResult();
+};$('back').onclick=()=>{if(current>0){current--;render()}};
+$('restart').onclick=()=>{answers=Array(questions.length).fill(null).map(()=>[]);current=0;$('results').classList.add('hidden');$('quiz').classList.remove('hidden');render();window.scrollTo({top:0,behavior:'smooth'})};
+$('review').onclick=()=>{$('results').classList.add('hidden');$('quiz').classList.remove('hidden');current=0;render();window.scrollTo({top:$('quiz').offsetTop-10,behavior:'smooth'})};render();
+</script>
+</body></html>
