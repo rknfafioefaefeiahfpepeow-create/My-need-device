@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -89,7 +90,8 @@ const questions=[
 {title:'買い物で一番重視するのは？',hint:'複数選択OK。手頃なガジェットやゲームソフトを探している人も、ここで教えてね。',multi:true,opts:[['value','コスパ','価格に対して長く役立つ'],['affordable','できるだけ手頃な価格','1万円前後のガジェットやゲームソフトも候補'],['quality','品質・長く使える','性能やサポートも重視'],['fun','楽しさ','趣味の時間を充実させたい'],['need','困りごとの解決','今の不便をなくしたい']]},
 {title:'Apple製品との相性は？',hint:'1つ選択。今の機器との連携を考慮します。',multi:false,opts:[['apple','iPhoneやMacを使っている','Apple製品同士の連携が便利'],['windows','WindowsやAndroidが中心','Windows / Androidを使い慣れている'],['either','特にこだわりはない','目的に合えばどちらでも']]},
 {title:'自分には合わない・いらないものは？',hint:'複数選択OK。選んだものはおすすめ候補から外すよ。特にない場合は「特になし」を選んでね。',multi:true,opts:[['avoidexpensive','高価な機器','高性能PC・高価格帯のカメラなど'],['avoidapple','Apple製品','Mac・iPad・Apple Watchなど'],['avoidpc','PC・パソコン周辺機器','デスクトップPC・ノートPCなど'],['avoidgaming','ゲーム機・ゲームソフト','Switch・PCゲームなど'],['avoidmobile','スマホ・タブレット系','スマートフォン・タブレットなど'],['avoidaudio','音声機器','イヤホン・マイクなど'],['avoiddesk','デスク周りの機器','モニター・キーボード・マウスなど'],['avoidcamera','カメラ・VR機器','カメラ・VRヘッドセットなど'],['avoidhomenet','ネットワーク・スマートホーム','ルーター・スマートホーム機器など'],['avoidother','その他の周辺機器','プリンター・ストレージ・電子書籍リーダー・モバイルバッテリーなど'],['avoidwatch','スマートウォッチ','Apple Watch・Google Pixel Watch・Garminなど'],['avoidnone','特になし','どのジャンルも候補にしてOK']]},
-{title:'手頃なガジェット・ゲームソフトで気になるものは？',hint:'これまでの回答から高価な機器が優先ではない場合にだけ表示される質問だよ。複数選択OK！',multi:true,opts:[['desksetup','デスク環境を整えたい','モニター・キーボード・マウス'],['backup','保存容量やバックアップが心配','外付けSSD・ストレージ'],['print','紙に印刷したい','プリンター'],['stream','配信・録音・通話の音質を上げたい','マイク・配信機材'],['network','家のWi-Fiを改善したい','Wi-Fiルーター'],['reading','読書専用の端末がほしい','電子書籍リーダー'],['battery','外出時の充電が不安','モバイルバッテリー'],['smartliving','家電を便利に自動化したい','スマートホーム機器'],['switchgameinterest','Switchのゲームソフトがほしい','Nintendo Switch / Switch 2向け'],['pcgameinterest','PCゲームソフトがほしい','SteamなどのPCゲームストア']]}
+{title:'手頃なガジェット・ゲームソフトで気になるものは？',hint:'これまでの回答から高価な機器が優先ではない場合にだけ表示される質問だよ。複数選択OK！',multi:true,opts:[['desksetup','デスク環境を整えたい','モニター・キーボード・マウス'],['backup','保存容量やバックアップが心配','外付けSSD・ストレージ'],['print','紙に印刷したい','プリンター'],['stream','配信・録音・通話の音質を上げたい','マイク・配信機材'],['network','家のWi-Fiを改善したい','Wi-Fiルーター'],['reading','読書専用の端末がほしい','電子書籍リーダー'],['battery','外出時の充電が不安','モバイルバッテリー'],['smartliving','家電を便利に自動化したい','スマートホーム機器'],['switchgameinterest','Switchのゲームソフトがほしい','Nintendo Switch / Switch 2向け'],['pcgameinterest','PCゲームソフトがほしい','SteamなどのPCゲームストア']]},
+{title:'PCを買ったらどのゲームを遊びますか？',hint:'「ゲームを楽しむ」を選んだ人向けの追加質問だよ。複数選択OK。遊びたいゲームに合わせてゲームPCの目安スペックを提案するよ。',multi:true,opts:[['game_light','軽めのゲーム・インディーゲーム','Minecraft（軽め設定）・Stardew Valleyなど'],['game_esports','対戦・FPSゲーム','VALORANT・Fortnite・Apex Legendsなど'],['game_openworld','オープンワールド・アクション','モンスターハンター・Cyberpunk 2077など'],['game_sim','シミュレーション・大規模ゲーム','Cities: Skylines IIなど'],['game_vr','VRゲーム','PC接続型VRタイトル'],['game_unsure','まだ決めていない','幅広いゲームに対応できるPCがほしい']]}
 ];
 const products={
 desktop:[['🖥️','自作PC / BTOデスクトップ','用途に合わせて構成を選びやすい','Windows デスクトップ BTO PC 価格'],['🖥️','Dell / HP デスクトップ','メーカー保証やサポートも比較','Dell HP デスクトップ PC 日本']],
@@ -121,7 +123,7 @@ smarthome:[['💡','スマート電球・スマートプラグ','今ある照明
 };
 let answers=Array(questions.length).fill(null).map(()=>[]),current=0,lastRanked=[];
 const $=id=>document.getElementById(id);
-const emojis={work:'🧑‍💻',create:'🎨',play:'🎮',mobile:'📱',media:'📺',health:'❤️',audio:'🎧',upgrade:'🔧',home:'🏠',carry:'🎒',both:'🌐',sofa:'🛋️',pc:'💻',phone:'📲',tablet:'📱',watch:'⌚',game:'🕹️',none:'✨',low:'💴',mid:'💳',high:'💰',premium:'🏆',flex:'🤔',power:'⚡',portable:'🪶',simple:'👌',creative:'🖊️',comfort:'🛋️',value:'🪙',quality:'🛡️',fun:'🎉',need:'🎯',affordable:'🪙',apple:'🍎',windows:'🪟',either:'🤝',desksetup:'🖥️',backup:'💾',print:'🖨️',photo:'📷',stream:'🎙️',network:'📡',reading:'📚',vrinterest:'🥽',battery:'🔋',smartliving:'💡',switchgameinterest:'🕹️',pcgameinterest:'🎮',avoidexpensive:'💸',avoidapple:'🍎',avoidpc:'💻',avoidgaming:'🎮',avoidmobile:'📱',avoidaudio:'🎧',avoiddesk:'🖥️',avoidcamera:'📷',avoidhomenet:'📡',avoidother:'🧰',avoidwatch:'⌚',avoidnone:'👌'};
+const emojis={work:'🧑‍💻',create:'🎨',play:'🎮',mobile:'📱',media:'📺',health:'❤️',audio:'🎧',upgrade:'🔧',home:'🏠',carry:'🎒',both:'🌐',sofa:'🛋️',pc:'💻',phone:'📲',tablet:'📱',watch:'⌚',game:'🕹️',none:'✨',low:'💴',mid:'💳',high:'💰',premium:'🏆',flex:'🤔',power:'⚡',portable:'🪶',simple:'👌',creative:'🖊️',comfort:'🛋️',value:'🪙',quality:'🛡️',fun:'🎉',need:'🎯',affordable:'🪙',apple:'🍎',windows:'🪟',either:'🤝',desksetup:'🖥️',backup:'💾',print:'🖨️',photo:'📷',stream:'🎙️',network:'📡',reading:'📚',vrinterest:'🥽',battery:'🔋',smartliving:'💡',switchgameinterest:'🕹️',pcgameinterest:'🎮',avoidexpensive:'💸',avoidapple:'🍎',avoidpc:'💻',avoidgaming:'🎮',avoidmobile:'📱',avoidaudio:'🎧',avoiddesk:'🖥️',avoidcamera:'📷',avoidhomenet:'📡',avoidother:'🧰',avoidwatch:'⌚',avoidnone:'👌',game_light:'🌱',game_esports:'🎯',game_openworld:'🌍',game_sim:'🏙️',game_vr:'🥽',game_unsure:'🤔'};
 function render(){const q=questions[current];$('stepLabel').textContent=`質問 ${current+1} / ${questions.length}`;$('progressPct').textContent=`${Math.round((current+1)/questions.length*100)}%`;$('progressBar').style.width=`${(current+1)/questions.length*100}%`;$('question').textContent=q.title;$('hint').textContent=q.hint;$('multiHint').textContent=q.multi?'✓ 選択肢を複数タップできます。もう一度タップすると解除。':'● 1つだけ選んでください。';$('options').innerHTML='';
 if(current===7){const allBtn=document.createElement('button');allBtn.type='button';allBtn.className='option';allBtn.style.justifyContent='center';allBtn.innerHTML='<span><strong>☑️ 全選択</strong><small>「特になし」以外のジャンルをすべて除外</small></span>';allBtn.onclick=()=>{const allIds=q.opts.map(o=>o[0]).filter(id=>id!=='avoidnone');answers[current]=answers[current].length===allIds.length?[]:allIds;render()};$('options').appendChild(allBtn);}
 q.opts.forEach(([id,label,sub])=>{const b=document.createElement('button');b.className='option'+(answers[current].includes(id)?' selected':'');b.setAttribute('aria-pressed',answers[current].includes(id));b.innerHTML=`<span class="emoji">${emojis[id]||'•'}</span><span><strong>${label}</strong><small>${sub}</small></span>`;b.onclick=()=>{if(q.multi){if(current===7){if(id==='avoidnone'){answers[current]=answers[current].includes(id)?[]:['avoidnone'];}else{answers[current]=answers[current].includes(id)?answers[current].filter(x=>x!==id):[...answers[current].filter(x=>x!=='avoidnone'),id];}}else{answers[current]=answers[current].includes(id)?answers[current].filter(x=>x!==id):[...answers[current].filter(x=>x!=='none'),...(id==='none'?[]:[id])];if(id==='none'&&answers[current].length===0)answers[current]=['none'];}}else answers[current]=[id];render()};$('options').appendChild(b)});
@@ -152,15 +154,26 @@ exclusions.filter(x=>x!=='avoidnone').forEach(x=>(exclusionMap[x]||[]).forEach(i
 const extras=answers[8]||[];
 const extraMap={desksetup:{monitor:6,keyboard:4,mouse:4},backup:{storage:7},print:{printer:7},stream:{microphone:7,earbuds:2},network:{router:7},reading:{ereader:7,tablet:1},battery:{powerbank:7,phone:1},smartliving:{smarthome:7,phone:1},switchgameinterest:{switchgames:8,games:2},pcgameinterest:{pcgames:8,games:2}};
 extras.forEach(key=>Object.entries(extraMap[key]||{}).forEach(([id,v])=>add(id,v)));
+const gamePrefs=answers[9]||[];if(gamePrefs.length){add('gamingpc',6);add('pcgames',2);}
 const already={pc:['desktop','gamingpc','laptop','macstudio','macbook'],phone:['phone'],tablet:['tablet','ipad'],watch:['watch'],audio:['earbuds'],game:['console','games']};owned.forEach(o=>(already[o]||[]).forEach(id=>add(id,-3)));
 const ranked=Object.entries(s).map(([id,n])=>({device:devices.find(d=>d.id===id),score:n})).sort((a,b)=>b.score-a.score);
 const filtered=ranked.filter(x=>!excludedDevices.has(x.device.id));
 return filtered.length?filtered:ranked}
 function searchUrl(q){return 'https://www.google.com/search?q='+encodeURIComponent(q)}
+function gamePcProducts(){
+const prefs=answers[9]||[];
+let level='フルHD向けの入門〜中級構成',spec='GPU：RTX 4060クラス以上／メモリ：16GB以上／SSD：1TB推奨',query='ゲーミングPC RTX 4060 16GB メモリ 1TB SSD';
+if(prefs.includes('game_light')&&prefs.length===1){level='軽めのゲーム向け・コスパ重視',spec='GPU：内蔵GPUまたはRTX 3050〜4060クラス／メモリ：16GB／SSD：500GB〜1TB',query='コスパ ゲーミングPC 16GB SSD 価格';}
+if(prefs.includes('game_esports')&&!prefs.some(x=>['game_openworld','game_sim','game_vr'].includes(x))){level='対戦FPS向け・高フレームレート重視',spec='GPU：RTX 4060〜4070クラス／メモリ：16〜32GB／SSD：1TB／高リフレッシュレートモニターも検討',query='ゲーミングPC RTX 4060 RTX 4070 32GB 1TB';}
+if(prefs.some(x=>['game_openworld','game_sim'].includes(x))){level='重い3D・オープンワールド向け',spec='GPU：RTX 4070クラス以上を目安／メモリ：32GB推奨／SSD：1TB以上。高解像度ならさらに上位GPUを検討',query='ゲーミングPC RTX 4070 32GB 1TB SSD';}
+if(prefs.includes('game_vr')){level='PC接続VRも見据えた構成',spec='GPU：RTX 4070クラス以上を目安／メモリ：32GB推奨／SSD：1TB以上。利用するVRヘッドセットの公式要件も確認',query='VR対応 ゲーミングPC RTX 4070 32GB 1TB';}
+if(prefs.includes('game_unsure')){level='幅広いゲーム向けのバランス構成',spec='GPU：RTX 4060〜4070クラス／メモリ：32GBにできると安心／SSD：1TB以上',query='ゲーミングPC RTX 4060 RTX 4070 32GB 1TB SSD'};
+return [['🎮',level,spec,query],['🧩','ゲーム別の推奨スペックを確認','遊びたいタイトルの公式ページで必要・推奨要件を確認。予算・解像度・フレームレートでも最適構成は変わります','ゲーム名 推奨スペック 公式 ゲーミングPC']];
+}
 function showResult(){lastRanked=calc();const top=lastRanked[0];$('quiz').classList.add('hidden');$('results').classList.remove('hidden');$('resultIcon').textContent=top.device.icon;$('resultName').textContent=top.device.name;$('resultDesc').textContent=top.device.good+'。 '+top.device.watch+'は購入前に確認しましょう。';
 const max=Math.max(1,lastRanked[0].score);$('rankList').innerHTML=lastRanked.slice(0,5).map((x,i)=>`<div class="rank"><div class="rank-top"><span>${i+1}. ${x.device.icon} ${x.device.name}</span><span>${Math.max(0,x.score)} pt</span></div><div class="track"><span style="width:${Math.max(4,Math.max(0,x.score)/max*100)}%"></span></div></div>`).join('');
 $('reason').textContent=`選んだ目的「${goalsText(answers[0])}」、予算「${questions[3].opts.find(o=>o[0]===answers[3][0])?.[1]||'未選択'}」、重視するポイント「${goalsText(answers[4])}」などを総合して選びました。すでに持っている機器は重複購入にならないよう評価を調整しています。`;
-$('products').innerHTML=(products[top.device.id]||products.laptop).map(p=>`<article class="product"><div class="picon">${p[0]}</div><h3>${p[1]}</h3><p>${p[2]}</p><a class="text-link" target="_blank" rel="noopener noreferrer" href="${searchUrl(p[3])}">価格・仕様を検索 ↗</a></article>`).join('');
+$('products').innerHTML=(top.device.id==='gamingpc'?gamePcProducts():(products[top.device.id]||products.laptop)).map(p=>`<article class="product"><div class="picon">${p[0]}</div><h3>${p[1]}</h3><p>${p[2]}</p><a class="text-link" target="_blank" rel="noopener noreferrer" href="${searchUrl(p[3])}">価格・仕様を検索 ↗</a></article>`).join('');
 $('compareBody').innerHTML=lastRanked.slice(0,4).map(x=>`<tr><td>${x.device.icon} ${x.device.name}</td><td>${x.device.good}</td><td>${x.device.watch}</td><td>${x.device.budget}</td></tr>`).join('');
 $('matchLabel').textContent=`おすすめ1位 · ${Math.max(0,top.score)}ポイント`;window.scrollTo({top:$('results').offsetTop-10,behavior:'smooth'})}
 function goalsText(ids){return ids.map(id=>questions.flatMap(q=>q.opts).find(o=>o[0]===id)?.[1]||id).join('・')}
@@ -177,10 +190,16 @@ $('next').onclick=()=>{
 if(current===6){current=7;render();}
 else if(current===7){
   if(shouldAskAffordableFollowup()){current=8;render();}
+  else if(answers[0].includes('play')){current=9;render();}
   else showResult();
-}else if(current<questions.length-1){current++;render();}
+}else if(current===8){
+  if(answers[0].includes('play')){current=9;render();}
+  else showResult();
+}else if(current===9){showResult();}
+else if(current<7){current++;render();}
 else showResult();
-};$('back').onclick=()=>{if(current>0){current--;render()}};
+};
+$('back').onclick=()=>{if(current===9){current=shouldAskAffordableFollowup()?8:7;render();}else if(current>0){current--;render()}};
 $('restart').onclick=()=>{answers=Array(questions.length).fill(null).map(()=>[]);current=0;$('results').classList.add('hidden');$('quiz').classList.remove('hidden');render();window.scrollTo({top:0,behavior:'smooth'})};
 $('review').onclick=()=>{$('results').classList.add('hidden');$('quiz').classList.remove('hidden');current=0;render();window.scrollTo({top:$('quiz').offsetTop-10,behavior:'smooth'})};render();
 </script>
